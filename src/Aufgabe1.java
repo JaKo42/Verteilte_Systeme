@@ -15,7 +15,7 @@ public class Aufgabe1 extends Thread {
 
     public static void main(String[] args){
 
-    Semaphore [] sem = new Semaphore[8];
+    Semaphore [] sem = new Semaphore[9];
 
         for (int i = 0; i <sem.length ; i++) {
         sem[i] = new Semaphore(0);
@@ -220,9 +220,9 @@ class Thread_7 extends Thread{
         start();
     }
 
-    private void A1()
+    private void A7()
     {
-        System.out.println("Activity_4 running");
+        System.out.println("Activity_7 running");
     }
 
     public void run()
@@ -242,7 +242,7 @@ class Thread_7 extends Thread{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        A1();
+        A7();
 
     }
 
