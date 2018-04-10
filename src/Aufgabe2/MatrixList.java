@@ -11,25 +11,20 @@ public class MatrixList implements Iterable<Matrix> {
 
    Queue<Matrix> qM = new LinkedList<>();
 
-   public MatrixList{
-       this.qM.add(new Matrix);
+    //TODO die 2 Matrizen initialisieren ...hier oder im Programm? Vielleicht auch mit scanner?
+   public MatrixList(){
+        for (int i = 0; i<5; i++) {
+            for (int j = 0; j < 5; j++) {
+                this.qM.add(new Matrix(i, j));
+            }
+        }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
 
     @Override
     public Iterator<Matrix> iterator() {
-        return null;
+        return qM.iterator();
     }
 }
