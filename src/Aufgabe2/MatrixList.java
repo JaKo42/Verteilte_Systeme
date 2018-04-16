@@ -7,24 +7,36 @@ import java.util.Queue;
 //Source:https://www.java-forum.org/thema/matrixen-berechnen-nach-worker-master-paradigma-mit-threads.179440/
 
 
-public class MatrixList implements Iterable<Matrix> {
+public class MatrixList implements Iterable<Matrix>{
 
-   Queue<Matrix> qM = new LinkedList<>();
+    Queue<Matrix> qM = new LinkedList<>();
 
-    //TODO die 2 Matrizen initialisieren ...hier oder im Programm? Vielleicht auch mit scanner?
-   public MatrixList(){
-        for (int i = 0; i<5; i++) {
-            for (int j = 0; j < 5; j++) {
+    public MatrixList() {
+        this.init();
+    }
+
+    public void init() {
+        for(int i = 0; i < 5;i++) {
+            for(int j = 0; j < 5;j++) {
                 this.qM.add(new Matrix(i, j));
             }
         }
     }
 
+    public boolean isEmpty(){
+        return qM.isEmpty();
+    }
 
+    public synchronized Matrix getfirstMatrix(){
 
+        return qM.poll();
+
+    }
 
     @Override
     public Iterator<Matrix> iterator() {
+
         return qM.iterator();
     }
+
 }
