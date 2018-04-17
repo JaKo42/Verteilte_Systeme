@@ -7,20 +7,16 @@ public class BinoBerechnung {
 
     static int n;
     static int k;
+    static double ergebnis;
 
 
     public static void main(String[] args) {
 
         Scanner eingabe = new Scanner(System.in);
-        WorkerThread worker = new WorkerThread((n = eingabe.nextInt()),k = eingabe.nextInt());
-        worker.run();
 
-      //  ber.run();
-      //  System.out.println(ergebnis);
-
-        }
-
-    /*    boolean pruefung = false;
+        //Eingabe der Parameter
+        //Prüfung ob richtige Parameter eingegeben werden
+        boolean pruefung = false;
         do {
 
             System.out.println("n Wert zwischen 0 und 21 eingeben");
@@ -30,33 +26,26 @@ public class BinoBerechnung {
             if (n >= 0 && n <= 21)
                 pruefung = true;
 
-        }while (pruefung == false);
+        }while (!pruefung);
 
-
-        System.out.println("k Wert eingeben");
+        System.out.println("k wert eingeben");
         k = eingabe.nextInt();
 
+        //Erstellung des ersten Worker
 
-
-        System.out.println(berechnung(n,k));
-
-
-
-
-
-     static double berechnung(int n, int k){
-
-        if (k==0 || n == k ){
-            return 1;
+        WorkerThread worker = new WorkerThread(n,k);
+        worker.start();
+        try {
+            worker.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        else if (k>n)
-            return 0;
-        else
-        return berechnung(n - 1, k - 1) + berechnung(n - 1, k);
 
-     }
-*/
+        //Ausgabe des Ergebnisses
+        System.out.println("Ergebnis: " + worker.ergebnis);
 
+
+    }
 }
 
 
@@ -75,26 +64,25 @@ class WorkerThread extends Thread {
     public void run() {
         WorkerThread worker2;
         WorkerThread worker3;
+        //Überprüfung der Rechenregeln
         if (k == 0 || n == k) {
             ergebnis = 1;
         } else if (n < k)
             ergebnis = 0;
 
         else {
-
+            //Aufteilung der Arbeit
             worker2 = new WorkerThread(n - 1, k - 1);
             worker3 = new WorkerThread(n - 1, k);
-            worker2.run();
-            worker3.run();
-
-/*
-        try {
+            worker2.start();
+            worker3.start();
+            try{
                 worker2.join();
                 worker3.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-*/
+            //Summieren der Ergebnisse
             ergebnis = worker2.ergebnis + worker3.ergebnis;
 
         }

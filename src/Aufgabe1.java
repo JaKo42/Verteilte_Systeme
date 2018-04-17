@@ -12,13 +12,15 @@ public class Aufgabe1 {
         for (int i = 0; i <sem.length ; i++) {
         sem[i] = new Semaphore(0);
         }
-     new Thread_1(sem,"Thread_1");
-     new Thread_2(sem,"Thread_2");
-     new Thread_3(sem,"Thread_3");
-     new Thread_4(sem,"Thread_4");
-     new Thread_5(sem,"Thread_5");
-     new Thread_6(sem,"Thread_6");
-     new Thread_7(sem,"Thread_7");
+
+        new Thread_5(sem,"Thread_5");
+        new Thread_6(sem,"Thread_6");
+        new Thread_7(sem,"Thread_7");
+        new Thread_1(sem,"Thread_1");
+        new Thread_2(sem,"Thread_2");
+        new Thread_3(sem,"Thread_3");
+        new Thread_4(sem,"Thread_4");
+
     }
 }
 
