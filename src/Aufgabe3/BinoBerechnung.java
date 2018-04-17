@@ -2,26 +2,21 @@ package Aufgabe3;
 
 import java.util.Scanner;
 
-public class BinoBerechnung extends Thread {
 
-    static double ergebnis;
+public class BinoBerechnung {
+
     static int n;
     static int k;
 
 
-    public BinoBerechnung(int n, int k) {
-    this.n = n;
-    this.k = k;
-
-    }
-
     public static void main(String[] args) {
 
         Scanner eingabe = new Scanner(System.in);
-        BinoBerechnung ber = new BinoBerechnung(n = eingabe.nextInt(), k = eingabe.nextInt());
+        WorkerThread worker = new WorkerThread((n = eingabe.nextInt()),k = eingabe.nextInt());
+        worker.run();
 
-        ber.run();
-        System.out.println(ergebnis);
+      //  ber.run();
+      //  System.out.println(ergebnis);
 
         }
 
@@ -45,7 +40,7 @@ public class BinoBerechnung extends Thread {
 
         System.out.println(berechnung(n,k));
 
-*/
+
 
 
 
@@ -54,49 +49,57 @@ public class BinoBerechnung extends Thread {
         if (k==0 || n == k ){
             return 1;
         }
-
-
+        else if (k>n)
+            return 0;
+        else
         return berechnung(n - 1, k - 1) + berechnung(n - 1, k);
 
      }
+*/
 
-    @Override
-    public synchronized void start() {
-
-        System.out.println(ergebnis = berechnung(n - 1, k - 1));
-
-        System.out.println(ergebnis+= berechnung(n - 1, k));
-
-
-
-    }
-
-    @Override
-    public void run() {
-         System.out.println("thread start");
-         start();
-
-
-
-    }
 }
 
 
-/*
-class AddThread extends Thread{
+class WorkerThread extends Thread {
 
     int n;
     int k;
+    double ergebnis;
 
-    public AddThread(int n, int k) {
+    public WorkerThread(int n, int k) {
         this.n = n;
         this.k = k;
     }
 
-    @Override
+
     public void run() {
+        WorkerThread worker2;
+        WorkerThread worker3;
+        if (k == 0 || n == k) {
+            ergebnis = 1;
+        } else if (n < k)
+            ergebnis = 0;
+
+        else {
+
+            worker2 = new WorkerThread(n - 1, k - 1);
+            worker3 = new WorkerThread(n - 1, k);
+            worker2.run();
+            worker3.run();
+
+/*
+        try {
+                worker2.join();
+                worker3.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+*/
+            ergebnis = worker2.ergebnis + worker3.ergebnis;
+
+        }
 
 
     }
 }
-*/
+
