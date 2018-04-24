@@ -28,9 +28,7 @@ class Slave extends Thread {
                 matrixC[a][b] += matrixA[a][j] * matrixB[j][b];
             }
             counter++;
-            //    System.out.print(Thread.currentThread().getName()+" berechnet: ");
-            //    System.out.println(matrixC[a][b]);
-        }
+           }
     }
     public synchronized void MatrixAusgabe() {
         for(int i = 0; i < matrixC.length;i++) {
