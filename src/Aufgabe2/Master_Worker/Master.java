@@ -1,6 +1,7 @@
 package Aufgabe2.Master_Worker;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Master {
 
@@ -21,7 +22,7 @@ public class Master {
         int[][] matrixC = new int[5][5];
 
         MatrixList mlist = new MatrixList();
-        ArrayList<Matrix> pool = new ArrayList<>();
+        Stack<Matrix> pool = new Stack<>();
         for (int i = 0; i < 25; i++) {
             pool.add(mlist.getfirstMatrix());
         }
