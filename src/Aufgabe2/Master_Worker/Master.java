@@ -30,10 +30,15 @@ public class Master {
         for (int j = 0; j < slaveCount; j++) {
             slaves[j] = new Slave(matrixA, matrixB, matrixC, pool);
             slaves[j].start();
-            slaves[j].join();
-            slaves[j].MatrixAusgabe();
         }
-
+        for (int j = 0; j < slaveCount; j++) {
+            try {
+                slaves[j].join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        slaves[0].MatrixAusgabe();
 
         //slaves setzen
         /*int z1 = 25 % slaveCount;    //Variable um die restlichen(ungeraden) Koordinaten zuweisen zu können
